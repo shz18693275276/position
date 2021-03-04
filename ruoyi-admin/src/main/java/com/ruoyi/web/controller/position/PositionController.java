@@ -138,6 +138,7 @@ public class PositionController extends BaseController {
      */
     public TableDataInfo selectPositions(){
         startPage();
+        System.out.println("ananan");
         List<Position> positionList = positionService.selectPositions();
         return getDataTable(positionList);
     }
