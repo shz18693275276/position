@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.position.mapper.PositionMapper">
+
+    <resultMap type="Position" id="PositionResult">
+        <result property="id" column="id"/>
+        <result property="oneInstitutions" column="one_institutions"/>
+        <result property="twoInstitutions" column="two_institutions"/>
+        <result property="threeInstitutions" column="three_institutions"/>
+        <result property="positionType" column="position_type"/>
+        <result property="positionName" column="position_name"/>
+        <result property="position" column="position"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="qq" column="qq"/>
+        <result property="mobilePhone" column="mobile_phone"/>
+        <result property="address" column="address"/>
+        <result property="postcode" column="postcode"/>
+        <result property="nationality" column="nationality"/>
+        <result property="birthpalce" column="birthpalce"/>
+        <result property="birthday" column="birthday"/>
+        <result property="ethnic" column="ethnic"/>
+        <result property="religious" column="religious"/>
+        <result property="politicesStatus" column="politices_status"/>
+        <result property="idCard" column="id_card"/>
+        <result property="socialSecurityNumber" column="social_security_number"/>
+        <result property="age" column="age"/>
+        <result property="educationBackground" column="education_background"/>
+        <result property="averageEducationYears" column="average_education_years"/>
+        <result property="educationMajor" column="education_major"/>
+        <result property="salaryStandard" column="salary_standard"/>
+        <result property="openingBank" column="opening_bank"/>
+        <result property="account" column="account"/>
+        <result property="registrant" column="registrant"/>
+        <result property="createTime" column="create_time"/>
+        <result property="specialty" column="specialty"/>
+        <result property="hobby" column="hobby"/>
+        <result property="individualResume" column="individual_resume"/>
+        <result property="familyTies" column="family_ties"/>
+        <result property="remark" column="remark"/>
+        <result property="fileNumber" column="file_number"/>
+        <result property="isDelete" column="is_delete"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <sql id="selectPositionVo">
+        select id,file_number,status, is_delete,one_institutions, two_institutions, three_institutions, position_type, position_name, position, name, sex, email, phone, qq, mobile_phone, address, postcode, nationality, birthpalce, birthday, ethnic, religious, politices_status, id_card, social_security_number, age, education_background, average_education_years, education_major, salary_standard, opening_bank, account, registrant, create_time, specialty, hobby, individual_resume, family_ties, remark from position
+    </sql>
+
+    <select id="selectPositions" resultMap="PositionResult">
+        <include refid="selectPositionVo"/>
+        <where>
+            is_delete = '0'
+            and
+            status = '1'
+        </where>
+
+    </select>
+
+
+    <select id="selectPositionList" parameterType="Position" resultMap="PositionResult">
+        <include refid="selectPositionVo"/>
+        <where>
+             is_delete = '0'
+             and
+             status = '0' or status='2'
+            <if test="oneInstitutions != null  and oneInstitutions != ''">
+                and one_institutions = #{oneInstitutions}
+            </if>
+            <if test="twoInstitutions != null  and twoInstitutions != ''">
+                and two_institutions = #{twoInstitutions}
+            </if>
+            <if test="threeInstitutions != null  and threeInstitutions != ''">
+                and three_institutions = #{threeInstitutions}
+            </if>
+            <if test="positionType != null  and positionType != ''">
+                and position_type = #{positionType}
+            </if>
+            <if test="positionName != null  and positionName != ''">
+                and position_name like concat('%', #{positionName}, '%')
+            </if>
+            <if test="position != null  and position != ''">
+                and position = #{position}
+            </if>
+            <if test="name != null  and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="sex != null  and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="email != null  and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null  and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="qq != null  and qq != ''">
+                and qq = #{qq}
+            </if>
+            <if test="mobilePhone != null  and mobilePhone != ''">
+                and mobile_phone = #{mobilePhone}
+            </if>
+            <if test="address != null  and address != ''">
+                and address = #{address}
+            </if>
+            <if test="postcode != null  and postcode != ''">
+                and postcode = #{postcode}
+            </if>
+            <if test="nationality != null  and nationality != ''">
+                and nationality = #{nationality}
+            </if>
+            <if test="birthpalce != null  and birthpalce != ''">
+                and birthpalce = #{birthpalce}
+            </if>
+            <if test="birthday != null  and birthday != ''">
+                and birthday = #{birthday}
+            </if>
+            <if test="ethnic != null  and ethnic != ''">
+                and ethnic = #{ethnic}
+            </if>
+            <if test="religious != null  and religious != ''">
+                and religious = #{religious}
+            </if>
+            <if test="politicesStatus != null  and politicesStatus != ''">
+                and politices_status = #{politicesStatus}
+            </if>
+            <if test="idCard != null  and idCard != ''">
+                and id_card = #{idCard}
+            </if>
+            <if test="socialSecurityNumber != null  and socialSecurityNumber != ''">
+                and social_security_number = #{socialSecurityNumber}
+            </if>
+            <if test="age != null  and age != ''">
+                and age = #{age}
+            </if>
+            <if test="educationBackground != null  and educationBackground != ''">
+                and education_background = #{educationBackground}
+            </if>
+            <if test="averageEducationYears != null  and averageEducationYears != ''">
+                and average_education_years = #{averageEducationYears}
+            </if>
+            <if test="educationMajor != null  and educationMajor != ''">
+                and education_major = #{educationMajor}
+            </if>
+            <if test="salaryStandard != null  and salaryStandard != ''">
+                and salary_standard = #{salaryStandard}
+            </if>
+            <if test="openingBank != null  and openingBank != ''">
+                and opening_bank = #{openingBank}
+            </if>
+            <if test="account != null  and account != ''">
+                and account = #{account}
+            </if>
+            <if test="registrant != null  and registrant != ''">
+                and registrant = #{registrant}
+            </if>
+            <if test="specialty != null  and specialty != ''">
+                and specialty = #{specialty}
+            </if>
+            <if test="hobby != null  and hobby != ''">
+                and hobby = #{hobby}
+            </if>
+            <if test="individualResume != null  and individualResume != ''">
+                and individual_resume = #{individualResume}
+            </if>
+            <if test="familyTies != null  and familyTies != ''">
+                and family_ties = #{familyTies}
+            </if>
+            <if test="fileNumber != null  and fileNumber != ''">
+                and file_number = #{fileNumber}
+            </if>
+            <if test="status != null  and status != ''">
+                and status = #{status}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="selectPositionById" parameterType="Long"
+            resultMap="PositionResult">
+        <include refid="selectPositionVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPosition" parameterType="Position" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="oneInstitutions != null">one_institutions,
+            </if>
+            <if test="twoInstitutions != null">two_institutions,
+            </if>
+            <if test="threeInstitutions != null">three_institutions,
+            </if>
+            <if test="positionType != null">position_type,
+            </if>
+            <if test="positionName != null">position_name,
+            </if>
+            <if test="position != null">position,
+            </if>
+            <if test="name != null">name,
+            </if>
+            <if test="sex != null">sex,
+            </if>
+            <if test="email != null">email,
+            </if>
+            <if test="phone != null">phone,
+            </if>
+            <if test="qq != null">qq,
+            </if>
+            <if test="mobilePhone != null">mobile_phone,
+            </if>
+            <if test="address != null">address,
+            </if>
+            <if test="postcode != null">postcode,
+            </if>
+            <if test="nationality != null">nationality,
+            </if>
+            <if test="birthpalce != null">birthpalce,
+            </if>
+            <if test="birthday != null">birthday,
+            </if>
+            <if test="ethnic != null">ethnic,
+            </if>
+            <if test="religious != null">religious,
+            </if>
+            <if test="politicesStatus != null">politices_status,
+            </if>
+            <if test="idCard != null">id_card,
+            </if>
+            <if test="socialSecurityNumber != null">social_security_number,
+            </if>
+            <if test="age != null">age,
+            </if>
+            <if test="educationBackground != null">education_background,
+            </if>
+            <if test="averageEducationYears != null">average_education_years,
+            </if>
+            <if test="educationMajor != null">education_major,
+            </if>
+            <if test="salaryStandard != null">salary_standard,
+            </if>
+            <if test="openingBank != null">opening_bank,
+            </if>
+            <if test="account != null">account,
+            </if>
+            <if test="registrant != null">registrant,
+            </if>
+            <if test="createTime != null">create_time,
+            </if>
+            <if test="specialty != null">specialty,
+            </if>
+            <if test="hobby != null">hobby,
+            </if>
+            <if test="individualResume != null">individual_resume,
+            </if>
+            <if test="familyTies != null">family_ties,
+            </if>
+            <if test="remark != null">remark,
+            </if>
+            <if test="fileNumber != null">file_number,
+            </if>
+             <if test="isDelete != null">is_delete,
+            </if>
+            <if test="status != null">status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="oneInstitutions != null">#{oneInstitutions},
+            </if>
+            <if test="twoInstitutions != null">#{twoInstitutions},
+            </if>
+            <if test="threeInstitutions != null">#{threeInstitutions},
+            </if>
+            <if test="positionType != null">#{positionType},
+            </if>
+            <if test="positionName != null">#{positionName},
+            </if>
+            <if test="position != null">#{position},
+            </if>
+            <if test="name != null">#{name},
+            </if>
+            <if test="sex != null">#{sex},
+            </if>
+            <if test="email != null">#{email},
+            </if>
+            <if test="phone != null">#{phone},
+            </if>
+            <if test="qq != null">#{qq},
+            </if>
+            <if test="mobilePhone != null">#{mobilePhone},
+            </if>
+            <if test="address != null">#{address},
+            </if>
+            <if test="postcode != null">#{postcode},
+            </if>
+            <if test="nationality != null">#{nationality},
+            </if>
+            <if test="birthpalce != null">#{birthpalce},
+            </if>
+            <if test="birthday != null">#{birthday},
+            </if>
+            <if test="ethnic != null">#{ethnic},
+            </if>
+            <if test="religious != null">#{religious},
+            </if>
+            <if test="politicesStatus != null">#{politicesStatus},
+            </if>
+            <if test="idCard != null">#{idCard},
+            </if>
+            <if test="socialSecurityNumber != null">#{socialSecurityNumber},
+            </if>
+            <if test="age != null">#{age},
+            </if>
+            <if test="educationBackground != null">#{educationBackground},
+            </if>
+            <if test="averageEducationYears != null">#{averageEducationYears},
+            </if>
+            <if test="educationMajor != null">#{educationMajor},
+            </if>
+            <if test="salaryStandard != null">#{salaryStandard},
+            </if>
+            <if test="openingBank != null">#{openingBank},
+            </if>
+            <if test="account != null">#{account},
+            </if>
+            <if test="registrant != null">#{registrant},
+            </if>
+            <if test="createTime != null">#{createTime},
+            </if>
+            <if test="specialty != null">#{specialty},
+            </if>
+            <if test="hobby != null">#{hobby},
+            </if>
+            <if test="individualResume != null">#{individualResume},
+            </if>
+            <if test="familyTies != null">#{familyTies},
+            </if>
+            <if test="remark != null">#{remark},
+            </if>
+            <if test="fileNumber != null">#{fileNumber},
+            </if>
+            <if test="isDelete != null">#{isDelete},
+            </if>
+            <if test="status != null">#{status},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatePosition" parameterType="Position">
+        update position
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="oneInstitutions != null">one_institutions =
+                #{oneInstitutions},
+            </if>
+            <if test="twoInstitutions != null">two_institutions =
+                #{twoInstitutions},
+            </if>
+            <if test="threeInstitutions != null">three_institutions =
+                #{threeInstitutions},
+            </if>
+            <if test="positionType != null">position_type =
+                #{positionType},
+            </if>
+            <if test="positionName != null">position_name =
+                #{positionName},
+            </if>
+            <if test="position != null">position =
+                #{position},
+            </if>
+            <if test="name != null">name =
+                #{name},
+            </if>
+            <if test="sex != null">sex =
+                #{sex},
+            </if>
+            <if test="email != null">email =
+                #{email},
+            </if>
+            <if test="phone != null">phone =
+                #{phone},
+            </if>
+            <if test="qq != null">qq =
+                #{qq},
+            </if>
+            <if test="mobilePhone != null">mobile_phone =
+                #{mobilePhone},
+            </if>
+            <if test="address != null">address =
+                #{address},
+            </if>
+            <if test="postcode != null">postcode =
+                #{postcode},
+            </if>
+            <if test="nationality != null">nationality =
+                #{nationality},
+            </if>
+            <if test="birthpalce != null">birthpalce =
+                #{birthpalce},
+            </if>
+            <if test="birthday != null">birthday =
+                #{birthday},
+            </if>
+            <if test="ethnic != null">ethnic =
+                #{ethnic},
+            </if>
+            <if test="religious != null">religious =
+                #{religious},
+            </if>
+            <if test="politicesStatus != null">politices_status =
+                #{politicesStatus},
+            </if>
+            <if test="idCard != null">id_card =
+                #{idCard},
+            </if>
+            <if test="socialSecurityNumber != null">social_security_number =
+                #{socialSecurityNumber},
+            </if>
+            <if test="age != null">age =
+                #{age},
+            </if>
+            <if test="educationBackground != null">education_background =
+                #{educationBackground},
+            </if>
+            <if test="averageEducationYears != null">average_education_years =
+                #{averageEducationYears},
+            </if>
+            <if test="educationMajor != null">education_major =
+                #{educationMajor},
+            </if>
+            <if test="salaryStandard != null">salary_standard =
+                #{salaryStandard},
+            </if>
+            <if test="openingBank != null">opening_bank =
+                #{openingBank},
+            </if>
+            <if test="account != null">account =
+                #{account},
+            </if>
+            <if test="registrant != null">registrant =
+                #{registrant},
+            </if>
+            <if test="createTime != null">create_time =
+                #{createTime},
+            </if>
+            <if test="specialty != null">specialty =
+                #{specialty},
+            </if>
+            <if test="hobby != null">hobby =
+                #{hobby},
+            </if>
+            <if test="individualResume != null">individual_resume =
+                #{individualResume},
+            </if>
+            <if test="familyTies != null">family_ties =
+                #{familyTies},
+            </if>
+            <if test="remark != null">remark =
+                #{remark},
+            </if>
+            <if test="fileNumber != null">remark =
+                #{fileNumber},
+            </if>
+            <if test="isDelete != null">is_delete =
+                #{isDelete},
+            </if>
+            <if test="status != null">status =
+                #{status},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePositionById" parameterType="Long">
+        delete from position where id = #{id}
+    </delete>
+
+    <delete id="deletePositionByIds" parameterType="String">
+        delete from position where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateByIds" parameterType="String" >
+        update position set status='1' where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+</mapper>
